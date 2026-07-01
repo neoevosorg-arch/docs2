@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Configuration — Neo AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,::before,::after{box-sizing:border-box;margin:0;padding:0}:root{--primary:#0052ff;--canvas:#fff;--surface-soft:#f7f7f7;--surface-strong:#eef0f3;--hairline:#dee1e6;--ink:#0a0b0d;--body:#5b616e;--muted-text:#7c828a;--on-primary:#fff;--surface-dark:#0a0b0d;--radius:0.625rem;--radius-pill:100px;--font-sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;--font-mono:'SF Mono','Fira Code',monospace}html{scroll-behavior:smooth;font-size:16px}body{font-family:var(--font-sans);color:var(--ink);background:var(--surface-soft);line-height:1.6;-webkit-font-smoothing:antialiased}.layout{display:flex;min-height:100vh}.sidebar{position:fixed;top:0;left:0;bottom:0;z-index:50;width:260px;background:var(--canvas);border-right:1px solid var(--hairline);display:flex;flex-direction:column;transition:transform .3s}.sidebar-header{display:flex;align-items:center;gap:8px;padding:20px 24px;border-bottom:1px solid var(--hairline)}.sidebar-logo{font-size:1.25rem;font-weight:600;letter-spacing:-.02em}.sidebar-logo .light{font-weight:300;color:var(--primary)}.sidebar-logo .norm{font-weight:400;color:var(--primary)}.sidebar-logo .bold{font-weight:700;color:var(--ink)}.sidebar-nav{flex:1;overflow-y:auto;padding:16px 12px}.sidebar-nav a{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:var(--radius);font-size:.875rem;font-weight:500;color:var(--body);text-decoration:none;transition:all .15s}.sidebar-nav a:hover{background:var(--surface-strong);color:var(--ink)}.sidebar-nav a.active{background:rgba(0,82,255,.08);color:var(--primary)}.sidebar-nav a .num{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:50%;background:var(--surface-strong);font-size:.75rem;font-weight:600;color:var(--muted-text);flex-shrink:0}.sidebar-nav a.active .num{background:var(--primary);color:var(--on-primary)}.sidebar-toggle{display:none;position:fixed;top:16px;left:16px;z-index:60;background:var(--canvas);border:1px solid var(--hairline);border-radius:var(--radius);padding:8px 10px;cursor:pointer;font-size:1.25rem;color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.06)}.main{flex:1;margin-left:260px;min-height:100vh}.hero{background:linear-gradient(135deg,var(--canvas),var(--surface-soft));border-bottom:1px solid var(--hairline);padding:64px 64px 48px}.hero h1{font-size:2.25rem;font-weight:600;letter-spacing:-.03em;color:var(--ink);margin-bottom:12px}.hero p{font-size:1.0625rem;color:var(--body);max-width:640px;line-height:1.7}.hero .badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,82,255,.08);color:var(--primary);font-size:.75rem;font-weight:600;padding:4px 12px;border-radius:var(--radius-pill);margin-bottom:16px}.content{padding:48px 64px 80px;max-width:800px}.content section{margin-bottom:56px}.content section:target{scroll-margin-top:24px}.content h2{font-size:1.5rem;font-weight:600;letter-spacing:-.02em;color:var(--ink);margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--primary)}.content h3{font-size:1.125rem;font-weight:600;color:var(--ink);margin-top:32px;margin-bottom:12px}.content h4{font-size:.9375rem;font-weight:600;color:var(--ink);margin-top:24px;margin-bottom:8px}.content p{font-size:.9375rem;color:var(--body);margin-bottom:16px;line-height:1.7}.content p strong{color:var(--ink);font-weight:600}.content ul,.content ol{margin:0 0 16px 24px;font-size:.9375rem;color:var(--body);line-height:1.7}.content li{margin-bottom:6px}.content blockquote{margin:16px 0 20px;padding:14px 20px;background:var(--surface-soft);border-left:3px solid var(--primary);border-radius:0 var(--radius) var(--radius) 0;font-size:.875rem;color:var(--body);line-height:1.6}.content blockquote strong{color:var(--ink)}.content table{width:100%;border-collapse:collapse;margin:16px 0 24px;font-size:.875rem;border-radius:var(--radius);overflow:hidden}.content th{background:var(--surface-strong);color:var(--ink);font-weight:600;text-align:left;padding:10px 14px;border-bottom:1px solid var(--hairline)}.content td{padding:10px 14px;border-bottom:1px solid var(--hairline);color:var(--body)}.content code{font-family:var(--font-mono);font-size:.8125rem;background:var(--surface-strong);padding:2px 6px;border-radius:4px;color:var(--ink)}.content pre{margin:16px 0 24px;padding:20px 24px;background:var(--surface-dark);border-radius:var(--radius);overflow-x:auto;-webkit-overflow-scrolling:touch;font-size:.8125rem;line-height:1.6;word-break:normal;white-space:pre}.content pre code{background:none;padding:0;color:#e1e4e8;font-size:inherit;word-break:normal;white-space:pre}.content img{max-width:100%;border-radius:var(--radius);border:1px solid var(--hairline);margin:16px 0;height:auto}.content img[width]{max-width:400px;width:auto}.content table{word-break:normal;white-space:nowrap}.checklist{list-style:none;margin-left:0}.checklist li{display:flex;align-items:flex-start;gap:10px;padding:12px 16px;margin-bottom:4px;background:var(--canvas);border-radius:var(--radius);border:1px solid var(--hairline)}.checklist li .check{color:#05b169;font-size:1.125rem;flex-shrink:0}.overlay{display:none;position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.3)}.overlay.open{display:block}.tag{border-radius:var(--radius-pill);padding:2px 8px;font-size:.6875rem;font-weight:600;display:inline-block;white-space:nowrap}.tag--rec{background:#d3e0ff;color:var(--primary)}.tag--fast{background:#d1f5e8;color:#059669}.tag--multi{background:#eee5ff;color:#7c3aed}.tag--afford{background:#fef9c3;color:#a16207}.tag--self{background:var(--surface-strong);color:var(--body)}.tag--model{background:rgba(0,82,255,.06);color:var(--body);font-size:.75rem;padding:1px 6px}@media(max-width:768px){.sidebar{transform:translateX(-100%)}.sidebar.open{transform:translateX(0)}.sidebar-toggle{display:block}.main{margin-left:0}.hero{padding:72px 24px 32px}.hero h1{font-size:1.625rem}.content{padding:32px 24px 64px}.content table{white-space:normal;font-size:.8125rem}.content td,.content th{padding:8px 10px}.content pre{margin:16px -12px;border-radius:0;padding:16px 20px;font-size:.75rem;width:calc(100% + 24px)}}@media(min-width:769px)and(max-width:1024px){.hero{padding:48px 40px 36px}.content{padding:40px 40px 64px}}
+</style>
+</head>
+<body>
+<div class="layout">
+<button class="sidebar-toggle" id="menuToggle" aria-label="Menu">☰</button>
+<div class="overlay" id="overlay"></div>
+<aside class="sidebar" id="sidebar">
+<div class="sidebar-header"><span class="sidebar-logo"><span class="light">n</span><span class="norm">eo</span><span class="bold">AI</span></span></div>
+<nav class="sidebar-nav">
+<a href="#s1" class="active"><span class="num">1</span> Supported Providers</a>
+<a href="#s2"><span class="num">2</span> API Key Safety</a>
+<a href="#s3"><span class="num">3</span> Setup Instructions</a>
+<a href="#s4"><span class="num">4</span> Local LLM</a>
+<a href="#s5"><span class="num">5</span> Troubleshooting</a>
+</nav>
+</aside>
+<div class="main">
+<header class="hero">
+<span class="badge">🤖 AI Configuration Guide</span>
+<h1>Configure AI Providers</h1>
+<p>Complete guide to setting up AI providers for proposal generation — from cloud APIs to local models running on your own machine.</p>
+</header>
+<div class="content">
+
+<!-- ============================================================ -->
+<!-- SECTION 1                                                      -->
+<!-- ============================================================ -->
+<section id="s1">
+<h2>1. Supported AI Providers</h2>
+<p>Neo AI supports <strong>7 AI providers</strong>. You only need one to get started. Each offers different pricing, speed, and privacy trade-offs.</p>
+
+<table>
+<thead><tr><th>Provider</th><th>Badge</th><th>Description</th><th>Website</th></tr></thead>
+<tbody>
+<tr><td><strong>OpenAI</strong></td><td><span class="tag tag--rec">RECOMMENDED</span></td><td>Industry standard for high-accuracy institutional reporting</td><td><a href="https://openai.com" target="_blank">openai.com</a></td></tr>
+<tr><td><strong>Anthropic</strong></td><td><span class="tag tag--rec">RECOMMENDED</span></td><td>Claude models optimized for safety and long-form document context</td><td><a href="https://anthropic.com" target="_blank">anthropic.com</a></td></tr>
+<tr><td><strong>Groq</strong></td><td><span class="tag tag--fast">FAST & AFFORDABLE</span></td><td>Ultra-fast LPU inference for real-time collaborative drafting</td><td><a href="https://groq.com" target="_blank">groq.com</a></td></tr>
+<tr><td><strong>Gemini</strong></td><td><span class="tag tag--rec">RECOMMENDED</span></td><td>Google's multimodal models built for speed and scalable reasoning</td><td><a href="https://ai.google.dev" target="_blank">ai.google.dev</a></td></tr>
+<tr><td><strong>OpenRouter</strong></td><td><span class="tag tag--multi">MULTI-MODEL</span></td><td>Unified API gateway to 200+ models from every major provider</td><td><a href="https://openrouter.ai" target="_blank">openrouter.ai</a></td></tr>
+<tr><td><strong>DeepSeek</strong></td><td><span class="tag tag--afford">AFFORDABLE</span></td><td>Cost-efficient reasoning models with competitive benchmark scores</td><td><a href="https://deepseek.com" target="_blank">deepseek.com</a></td></tr>
+<tr><td><strong>Local LLM</strong></td><td><span class="tag tag--self">SELF-HOSTED</span></td><td>Connect to LM Studio or Ollama for air-gapped data privacy</td><td>See <a href="#s4">Local LLM section</a></td></tr>
+</tbody>
+</table>
+
+<blockquote><strong>Tip for beginners:</strong> Start with <strong>Groq</strong> — generous free tier, fast inference, and the easiest to set up.</blockquote>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 2                                                      -->
+<!-- ============================================================ -->
+<section id="s2">
+<h2>2. API Key Safety</h2>
+
+<blockquote><strong>⚠️ Important:</strong> When you switch between AI providers in the app, the API key field is <strong>cleared</strong>. This is by design — each provider uses a different key format and endpoint.</blockquote>
+
+<p><strong>Before switching providers, always save your current API key in a secure text file.</strong> You will need to re-enter it if you switch back.</p>
+
+<h3>Best Practices</h3>
+<ul>
+<li>Store keys in a password manager (1Password, Bitwarden, etc.)</li>
+<li>Never commit API keys to version control</li>
+<li>Never share your keys publicly</li>
+<li>Rotate keys periodically from the provider's dashboard</li>
+</ul>
+
+<h3>Getting Your API Key</h3>
+<p>All cloud providers follow the same basic flow:</p>
+<ol>
+<li><strong>Create an account</strong> on the provider's website</li>
+<li><strong>Navigate to API Keys</strong> (usually under Settings, Developers, or Account)</li>
+<li><strong>Generate a new API key</strong> — copy it immediately (you won't see it again)</li>
+<li><strong>Add credits/billing</strong> if required (most providers offer free tiers)</li>
+<li><strong>Paste the key</strong> into the AI Settings page in this app</li>
+<li><strong>Save your key in a secure text file</strong> before leaving the page</li>
+</ol>
+
+<blockquote><strong>Security Note:</strong> Your API key is stored encrypted in your database. Never share it publicly or commit it to version control.</blockquote>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 3                                                      -->
+<!-- ============================================================ -->
+<section id="s3">
+<h2>3. Provider Setup Instructions</h2>
+
+<!-- OpenAI -->
+<h3>3.1 OpenAI</h3>
+<ol>
+<li>Sign up at <a href="https://platform.openai.com" target="_blank">platform.openai.com</a></li>
+<li>Go to <strong>API Keys</strong> → <strong>Create new secret key</strong></li>
+<li>Copy the key (starts with <code>sk-...</code>)</li>
+<li>In the app Settings → AI Provider:
+  <ul>
+    <li><strong>Provider:</strong> OpenAI</li>
+    <li><strong>API Key:</strong> Paste your key</li>
+    <li><strong>Base URL:</strong> <code>https://api.openai.com/v1</code> (default)</li>
+    <li><strong>Model:</strong> <code>gpt-4o</code> (recommended) or <code>gpt-4o-mini</code></li>
+  </ul>
+</li>
+</ol>
+<p><strong>Example models:</strong> <span class="tag tag--model">gpt-4o</span> <span class="tag tag--model">gpt-4o-mini</span> <span class="tag tag--model">gpt-4-turbo</span> <span class="tag tag--model">gpt-3.5-turbo</span></p>
+
+<!-- Anthropic -->
+<h3>3.2 Anthropic</h3>
+<ol>
+<li>Sign up at <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
+<li>Go to <strong>API Keys</strong> → <strong>Create Key</strong></li>
+<li>Copy the key (starts with <code>sk-ant-...</code>)</li>
+<li>In the app Settings → AI Provider:
+  <ul>
+    <li><strong>Provider:</strong> Anthropic</li>
+    <li><strong>API Key:</strong> Paste your key</li>
+    <li><strong>Base URL:</strong> <code>https://api.anthropic.com</code> (default)</li>
+    <li><strong>Model:</strong> <code>claude-3-5-sonnet-20241022</code> (recommended)</li>
+  </ul>
+</li>
+</ol>
+<p><strong>Example models:</strong> <span class="tag tag--model">claude-3-5-sonnet-20241022</span> <span class="tag tag--model">claude-3-5-haiku-20241022</span> <span class="tag tag--model">claude-3-opus-20240229</span></p>
+
+<!-- Groq -->
+<h3>3.3 Groq</h3>
+<ol>
+<li>Sign up at <a href="https://console.groq.com" target="_blank">console.groq.com</a></li>
+<li>Go to <strong>API Keys</strong> → <strong>Create API Key</strong></li>
+<li>Copy the key (starts with <code>gsk_...</code>)</li>
+<li>In the app Settings → AI Provider:
+  <ul>
+    <li><strong>Provider:</strong> Groq</li>
+    <li><strong>API Key:</strong> Paste your key</li>
+    <li><strong>Base URL:</strong> <code>https://api.groq.com/openai/v1</code> (default)</li>
+    <li><strong>Model:</strong> <code>llama-3.3-70b-versatile</code> (recommended)</li>
+  </ul>
+</li>
+</ol>
+<p><strong>Example models:</strong> <span class="tag tag--model">llama-3.3-70b-versatile</span> <span class="tag tag--model">deepseek-r1-distill-llama-70b</span> <span class="tag tag--model">llama-guard-3-8b</span></p>
+
+<!-- Gemini -->
+<h3>3.4 Gemini (Google)</h3>
+<ol>
+<li>Sign up at <a href="https://aistudio.google.com" target="_blank">aistudio.google.com</a></li>
+<li>Go to <strong>Get API Key</strong> → <strong>Create API Key</strong></li>
+<li>Copy the key</li>
+<li>In the app Settings → AI Provider:
+  <ul>
+    <li><strong>Provider:</strong> Gemini</li>
+    <li><strong>API Key:</strong> Paste your key</li>
+    <li><strong>Base URL:</strong> <code>https://generativelanguage.googleapis.com/v1beta/openai/</code> (default)</li>
+    <li><strong>Model:</strong> <code>gemini-2.0-flash</code> (recommended)</li>
+  </ul>
+</li>
+</ol>
+<p><strong>Example models:</strong> <span class="tag tag--model">gemini-2.0-flash</span> <span class="tag tag--model">gemini-1.5-pro</span> <span class="tag tag--model">gemini-1.5-flash</span></p>
+
+<!-- OpenRouter -->
+<h3>3.5 OpenRouter</h3>
+<ol>
+<li>Sign up at <a href="https://openrouter.ai" target="_blank">openrouter.ai</a></li>
+<li>Go to <strong>Keys</strong> → <strong>Create Key</strong></li>
+<li>Copy the key (starts with <code>sk-or-...</code>)</li>
+<li>In the app Settings → AI Provider:
+  <ul>
+    <li><strong>Provider:</strong> OpenRouter</li>
+    <li><strong>API Key:</strong> Paste your key</li>
+    <li><strong>Base URL:</strong> <code>https://openrouter.ai/api/v1</code> (default)</li>
+    <li><strong>Model:</strong> <code>openai/gpt-4o</code> or any supported model</li>
+  </ul>
+</li>
+</ol>
+<p><strong>Example models:</strong> <span class="tag tag--model">openai/gpt-4o</span> <span class="tag tag--model">openai/gpt-oss-120b</span> <span class="tag tag--model">anthropic/claude-3.5-sonnet</span> <span class="tag tag--model">google/gemini-2.0-flash</span></p>
+
+<blockquote>OpenRouter gives you access to 200+ models through a single API. Browse available models at <a href="https://openrouter.ai/models" target="_blank">openrouter.ai/models</a>.</blockquote>
+
+<!-- DeepSeek -->
+<h3>3.6 DeepSeek</h3>
+<ol>
+<li>Sign up at <a href="https://platform.deepseek.com" target="_blank">platform.deepseek.com</a></li>
+<li>Go to <strong>API Keys</strong> → <strong>Create API Key</strong></li>
+<li>Copy the key (starts with <code>sk-...</code>)</li>
+<li>In the app Settings → AI Provider:
+  <ul>
+    <li><strong>Provider:</strong> DeepSeek</li>
+    <li><strong>API Key:</strong> Paste your key</li>
+    <li><strong>Base URL:</strong> <code>https://api.deepseek.com/v1</code> (default)</li>
+    <li><strong>Model:</strong> <code>deepseek-chat</code> (recommended)</li>
+  </ul>
+</li>
+</ol>
+<p><strong>Example models:</strong> <span class="tag tag--model">deepseek-chat</span> <span class="tag tag--model">deepseek-reasoner</span></p>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 4                                                      -->
+<!-- ============================================================ -->
+<section id="s4">
+<h2>4. Local LLM Setup (LM Studio & Ollama)</h2>
+<p>For air-gapped environments or complete data privacy, you can run LLMs locally on your machine. Neo AI supports two popular local LLM servers.</p>
+
+<h3>4.1 Option 1: LM Studio</h3>
+<p><strong>LM Studio</strong> is a desktop app that lets you download and run LLMs locally.</p>
+
+<h4>Installation</h4>
+<ol>
+<li>Download from <a href="https://lmstudio.ai" target="_blank">lmstudio.ai</a></li>
+<li>Install and launch LM Studio</li>
+<li>Download a model (e.g., Llama 3, Mistral, Phi-3) from the built-in model library</li>
+</ol>
+
+<h4>Start the Local Server</h4>
+<ol>
+<li>In LM Studio, go to the <strong>Local Server</strong> tab (left sidebar)</li>
+<li>Select your downloaded model</li>
+<li>Click <strong>Start Server</strong></li>
+<li>The server will run at <strong><code>http://localhost:1234</code></strong> by default</li>
+</ol>
+
+<h4>Configure the App</h4>
+<p>In the app Settings → AI Provider:</p>
+<ul>
+<li><strong>Provider:</strong> Local LLM</li>
+<li><strong>API Key:</strong> Leave blank (local servers don't require auth)</li>
+<li><strong>Base URL:</strong> <code>http://localhost:1234/v1</code></li>
+<li><strong>Model:</strong> Enter the exact model name shown in LM Studio (e.g., <code>llama-3.2-3b-instruct</code>)</li>
+</ul>
+
+<blockquote><strong>Important:</strong> The app must be able to reach <code>localhost:1234</code>. If you're running the app in Docker, use <code>host.docker.internal</code> instead of <code>localhost</code>.</blockquote>
+
+<h3>4.2 Option 2: Ollama</h3>
+<p><strong>Ollama</strong> is a command-line tool for running LLMs locally.</p>
+
+<h4>Installation</h4>
+<p><strong>macOS / Linux:</strong></p>
+<pre><code>curl -fsSL https://ollama.com/install.sh | sh</code></pre>
+
+<p><strong>Windows:</strong> Download from <a href="https://ollama.com" target="_blank">ollama.com</a> and run the installer.</p>
+
+<h4>Pull and Run a Model</h4>
+<pre><code># Pull a model (e.g., Llama 3.2)
+ollama pull llama3.2
+
+# Run the model (starts server on port 11434)
+ollama serve</code></pre>
+
+<p>Or run in background:</p>
+<pre><code>ollama serve &</code></pre>
+
+<h4>Configure the App</h4>
+<p>In the app Settings → AI Provider:</p>
+<ul>
+<li><strong>Provider:</strong> Local LLM</li>
+<li><strong>API Key:</strong> Leave blank</li>
+<li><strong>Base URL:</strong> <code>http://localhost:11434/v1</code></li>
+<li><strong>Model:</strong> <code>llama3.2</code> (or whatever model you pulled)</li>
+</ul>
+
+<blockquote><strong>Note:</strong> Ollama's OpenAI-compatible endpoint is at <code>/v1</code>, so the full URL is <code>http://localhost:11434/v1</code>.</blockquote>
+
+<h3>4.3 Local LLM Requirements</h3>
+<table>
+<thead><tr><th>Requirement</th><th>Minimum</th><th>Recommended</th></tr></thead>
+<tbody>
+<tr><td><strong>RAM</strong></td><td>8 GB</td><td>16 GB+</td></tr>
+<tr><td><strong>VRAM</strong> (GPU)</td><td>4 GB</td><td>8 GB+</td></tr>
+<tr><td><strong>Disk Space</strong></td><td>5 GB</td><td>20 GB+</td></tr>
+<tr><td><strong>OS</strong></td><td>macOS 12+, Ubuntu 20.04+, Windows 10+</td><td>Latest stable</td></tr>
+</tbody>
+</table>
+
+<h3>4.4 Recommended Models for Local Use</h3>
+<table>
+<thead><tr><th>Model</th><th>Size</th><th>RAM Needed</th><th>Best For</th></tr></thead>
+<tbody>
+<tr><td>Llama 3.2 (3B)</td><td>~2 GB</td><td>6 GB</td><td>Fast, lightweight tasks</td></tr>
+<tr><td>Llama 3.2 (11B)</td><td>~7 GB</td><td>12 GB</td><td>Balanced quality/speed</td></tr>
+<tr><td>Mistral (7B)</td><td>~4 GB</td><td>8 GB</td><td>General purpose</td></tr>
+<tr><td>Phi-3 Mini (3.8B)</td><td>~2 GB</td><td>6 GB</td><td>Compact, capable</td></tr>
+<tr><td>Gemma 2 (9B)</td><td>~5 GB</td><td>10 GB</td><td>Google's open model</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ============================================================ -->
+<!-- SECTION 5                                                      -->
+<!-- ============================================================ -->
+<section id="s5">
+<h2>5. Troubleshooting</h2>
+
+<h3>"Connection failed" or "Cannot reach server"</h3>
+<ul>
+<li>Ensure the local LLM server is running (<code>localhost:1234</code> for LM Studio, <code>localhost:11434</code> for Ollama)</li>
+<li>Check firewall settings</li>
+<li>If using Docker, use <code>host.docker.internal</code> instead of <code>localhost</code></li>
+</ul>
+
+<h3>"Model not found"</h3>
+<ul>
+<li>Verify the model name matches exactly (case-sensitive)</li>
+<li>In LM Studio: check the model name in the <strong>Local Server</strong> tab</li>
+<li>In Ollama: run <code>ollama list</code> to see installed models</li>
+</ul>
+
+<h3>Slow generation speed</h3>
+<ul>
+<li>Use a smaller model (3B-7B parameters)</li>
+<li>Ensure you have enough RAM/VRAM</li>
+<li>Close other GPU-intensive applications</li>
+<li>For LM Studio: enable GPU acceleration in settings</li>
+</ul>
+
+<h3>API key errors</h3>
+<ul>
+<li>Double-check the key is copied correctly (no extra spaces)</li>
+<li>Verify the key hasn't expired or been revoked</li>
+<li>Ensure billing is set up (for cloud providers)</li>
+<li>Check the provider's status page for outages</li>
+</ul>
+
+<hr style="margin-top:48px;border:none;border-top:1px solid var(--hairline);">
+<p style="text-align:center;color:var(--muted-text);font-size:.8125rem;margin-top:24px;"><em>Need help? Check the other guides in the <code>docs/</code> folder or contact support.</em> 🚀</p>
+</section>
+
+</div><!-- .content -->
+</div><!-- .main -->
+</div><!-- .layout -->
+
+<script>
+const s=document.getElementById('sidebar'),o=document.getElementById('overlay'),m=document.getElementById('menuToggle');
+m.onclick=()=>{s.classList.toggle('open');o.classList.toggle('open')};
+o.onclick=()=>{s.classList.remove('open');o.classList.remove('open')};
+const secs=document.querySelectorAll('section[id]'),links=document.querySelectorAll('.sidebar-nav a');
+function u(){let c='';secs.forEach(s=>{const t=window.scrollY,o=s.offsetTop-100,h=s.offsetHeight;if(t>=o&&t<o+h)c=s.id});links.forEach(l=>{l.classList.remove('active');if(l.getAttribute('href')==='#'+c)l.classList.add('active')})}
+window.addEventListener('scroll',u);window.addEventListener('load',u);
+links.forEach(l=>l.addEventListener('click',()=>{if(window.innerWidth<=768){s.classList.remove('open');o.classList.remove('open')}}));
+</script>
+
+</body>
+</html>
